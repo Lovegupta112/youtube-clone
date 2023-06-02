@@ -1,6 +1,6 @@
 const apiKey='AIzaSyDHMQ0rn-rtl1YmBgnIfdLWOhTac0SL-0o';
 localStorage.setItem("api_key",apiKey);
-
+let searchInput;
 //for header -----------
 window.addEventListener('DOMContentLoaded',async function(){
 
@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded',async function(){
    headerContainer.innerHTML=data;
 
 
-   let searchInput=document.getElementById('input-search');
+    searchInput=document.getElementById('input-search');
    let searchBtn=document.getElementById('search-btn');
    searchBtn.addEventListener('click',()=>{
     searchVideos(searchInput);
@@ -27,14 +27,14 @@ window.addEventListener('DOMContentLoaded',async function(){
 })
 
 
+window.addEventListener('load',()=>{
+    // searchInput.value="";
+  fetchVideos();
+});
 
 
 
 
-// window.addEventListener('DOMContentLoaded',()=>{
-//     searchInput.value="";
-//   fetchVideos();
-// });
 
 function searchVideos(searchInput){
      let searchValue=searchInput.value;
@@ -42,7 +42,7 @@ function searchVideos(searchInput){
 }
 
 async function fetchVideos(searchValue){
-    let endpoint=`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchValue}&maxResults=10&key=${apiKey}`;
+    let endpoint=`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchValue}&maxResults=20&key=${apiKey}`;
    
     try{
     let response=await fetch(endpoint);
@@ -211,18 +211,22 @@ async function fetchStats(videoId){
 
      let response=await fetch(endpoint);
      let result= await response.json();
-      // console.log(result);
+      console.log(result);
   return result;
 }
 
 
 // ---------navigate to new page--------------------
 function navigateToVideo(videoId){
-  console.log(videoId)
+  console.log(videoId);
+  console.log(searchInput);
   
 if(videoId){
   const path='/video.html';
-  document.cookie=`videoId=${videoId}; path=${path}`
+  // document.cookie=`videoId=${videoId}; path=${path}`
+   let myObject={videoId:`${videoId}`,inputValue:`${searchInput.value}`};
+   let cookieValue=JSON.stringify(myObject);
+   document.cookie="myCookie="+cookieValue;
  window.open('http://127.0.0.1:5500/video.html','blank');
 }
 else{

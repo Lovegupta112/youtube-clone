@@ -1,10 +1,31 @@
-let cookieString=document.cookie;
-let videoId=cookieString.split('=')[1];
 const apiKey=localStorage.getItem("api_key");
 console.log(apiKey);
+let cookieString=document.cookie;
+// let videoId=cookieString.split('=')[1];
 // console.log(videoId)
 // console.log(cookieString);
+let cookieValue="";
+if(cookieString && cookieString!==""){
+   let cookieName="myCookie=";
+   let cookieArray=cookieString.split(';');
 
+   for(let i=0;i<cookieArray.length;i++ ){
+    let cookieItem=cookieArray[i].trim();
+
+    if(cookieItem.indexOf(cookieName)===0){
+      cookieValue=cookieItem.substring(cookieName.length);
+      break;
+    }
+   }
+}
+let videoId,inputValue;
+
+if(cookieValue!==""){
+  let myObject=JSON.parse(cookieValue);
+  console.log(myObject);
+  videoId=myObject.videoId;
+  inputValue=myObject.inputValue;
+}
 
 
 //for header -----------
@@ -61,6 +82,7 @@ if(YT){
                 console.log("videos loaded");
                 fetchStats(videoId);
                 fetchVideoDetails(videoId); 
+                fetchSuggestionVideos();
             }
          }
     })
@@ -252,7 +274,55 @@ commentsBody.innerHTML +=`
 
 }
 
+// for suggestion videos--
 
+
+
+async function fetchSuggestionVideos(){
+
+  let endpoint=`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${inputValue}&maxResults=20&key=${apiKey}`;
+
+
+  try{
+   let response=await fetch(endpoint);
+   let result= await response.json();
+  //  console.log(result);
+   showSuggestionVideos(result.items);
+  }
+  catch(error){
+    console.log("fetching suggestions videos is failed",error);
+  }
+}
+
+
+
+
+ function showSuggestionVideos(items){
+
+  let suggestioncontainer=document.getElementsByClassName('suggestion-container')[0];
+
+  for(let videoItem of items){
+    let imageUrl=videoItem.snippet.thumbnails.high.url;
+    let suggestionVideo=document.createElement('div');
+    suggestionVideo.className='suggestion-video';
+
+
+    suggestionVideo.innerHTML=`
+    
+    <div class="suggestion-video-image">
+    <img src=${imageUrl} alt="suggestion-video">
+  </div>
+  <div class="suggestion-video-info">
+    <h4 class="suggestion-video-title">${videoItem.snippet.title.slice(0,30)}...</h4>
+     <p class="suggestion-video-channel">${videoItem.snippet.channelTitle}</p>
+     <p class="suggestion-video-uploadtime">${formatDate(videoItem.snippet.publishedAt)}</p>
+  </div>
+    
+    `
+  suggestioncontainer.append(suggestionVideo);
+  }
+
+}
 
 
 
