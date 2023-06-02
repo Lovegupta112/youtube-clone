@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+:root{
+    --fade-black:#0f0f0f;
+    --light-white:#dad3d3cf;
+    --white:white;
+    --light-grey:#353232b3;
+    --light-black:#00000086;
+    --sans-serif:sans-serif;
+}
+body{
+    background-color:var(--fade-black);
+}
+.container{
+    min-height:100vh;
+    /* border:2px solid yellow; */
+    color:var(--light-white);
+  display: flex;
+}
+.container-left-section{
+    display:flex;
+    flex-direction: column;
+    width:20%;
+    position: fixed;
+    left:0;
+    top:0;
+    padding: 1rem 0;
+}
+
+/* menubar---------------------------- */
+
+
+
+
+.menubar-logo {
+    /* border:1px solid rgb(235, 44, 44); */
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly;
+    color:var(--light-white);
+    margin:1rem 0;
+}
+ #menu-icon {
+    cursor: pointer;
+    font-size: 27px !important;
+    margin: 0;
+  }
+.menubar-logo .logo{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.menubar-logo .logo img{
+    width:30px;
+    height:30px;    
+}
+.menubar-logo .logo #youtube-title{
+    font-size:1rem;
+    color:var(--white);
+    font-weight:900;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+
+.container-left-section{
+    display: flex;
+    flex-direction: column;
+    /* border:1px solid blue; */
+}
+
+.home , .subscriptions , .video-library, .liked-video,.history{
+    display: flex;
+/* justify-content: center; */
+align-items: center;
+font-size:1rem;
+width:fit-content;
+} 
+
+.container-left-section div:hover{
+    background-color:var(--light-grey);
+   
+}
+
+
+
+.container-left-section i{
+   margin:1rem ;
+  font-size:1.4rem!important;
+  color:var(--white);
+
+}
+
+
+
+.container-right-section{
+    display: flex;
+    flex-direction: column;
+    width:calc(100% - 20%);
+    margin-left:20%;
+    }
+    
+    
+    .headerContainer{
+       display: flex;
+    position: fixed;
+    top: 0;
+    z-index: 1100;
+    }
+    
+    header{
+        /* border:1px solid rgb(255, 255, 255); */
+       display:flex;
+       height:15vh;
+       width:100%;
+       position:fixed;
+       background-color:var(--fade-black);
+       height: 15vh;
+       z-index:1100;
+       /* width:calc(100% - 15%); */
+    }
+    
+    
+    main{
+        /* border:1px solid rgb(255, 5, 255); */
+        display: grid;
+        padding:20px;
+        overflow-y:auto;
+        /* grid-template-columns:repeat(3,280px); */
+        grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+        column-gap:20px;
+        row-gap:20px;
+        grid-auto-flow:row;
+       
+    }
+    
+
+/* nav-search------------------ */
+
+.nav-search{
+    /* border:1px solid green; */
+    width:60%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.nav-search .search-box{
+    display:flex;
+    border:1px solid grey;
+    border-radius: 20px;
+    width:70%;
+    justify-content:space-between;
+    align-items: center;
+    color:var(--light-white);
+    background-color:var(--light-grey);
+}
+.search-box input{
+border-radius:30px 0 0 30px;
+border:none;
+padding:0 0.6rem;
+line-height:2.7;
+width:90%;
+background:var(--fade-black);
+color:var(--light-white);
+font-size:1rem;
+}
+.search-box input:focus{
+    outline: none;
+}
+.search-box #search-btn{
+    margin:0 1rem;
+    text-align: center;
+    cursor: pointer;
+    background:none;
+    border:none;
+    color:var(--light-white);
+}
+
+.nav-search .voice-input{
+background-color:var(--light-grey);
+border-radius:20px;
+width:40px;
+height:40px;
+display:flex;
+justify-content: center;
+align-items: center;
+margin:0 0.4rem;
+color:var(--white);
+cursor: pointer;
+}
+
+/* nav right------------------------*/
+
+.nav-right{
+    /* border:1px solid orangered; */
+    width:calc(100% - (60% + 20%));
+    display:flex;
+    justify-content: right;
+align-items: center;
+padding-right: 1rem;
+}
+.nav-right i{
+    font-size:2rem;
+    cursor: pointer;
+}
+
+#notification,#videocam,#account
+{
+width:40px;
+height:40px;
+color:var(--white);
+}
+
+
+/*--------------- video cards-------- */
+
+.videoCards{
+    /* border:2px solid red; */
+    display:flex;
+    flex-direction: column;
+    height:fit-content;
+    border-radius:10px;
+    gap:10px;
+    transition:1s;
+    cursor: pointer;
+}
+.videoCards:active{
+transform:translateY(-8px);
+cursor: pointer;
+}
+.videoCards .image {
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    height: 170px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+.image img{
+    width:100%;
+    height:100%;
+    border-radius: 10px 10px 0 0;
+}
+.image .duration {
+    position: absolute;
+    color: white;
+    bottom: 12px;
+    right: 16px;
+    background:var(--light-black);
+    padding: 1px 1.5px;
+    z-index:100;
+}
+.videoCards .video-info{
+    display:flex;
+    /* border:1px solid white; */
+    width:98%;
+    justify-content: space-between;
+    border-radius: 0 0 10px 10px ;
+    font-size:0.7rem;
+}
+.video-info .channel-logo{
+    width:20%;
+    display: flex;
+justify-content: center;
+align-items: start;
+}
+.channel-logo img{
+    border-radius:20px;
+}
+.video-info .info{
+    width:75%;
+    display: flex;
+    flex-direction: column;
+    gap:2px;
+    font-family:var(--sans-serif);
+}
+.info #title{
+    color:var(--white);
+    font-size:0.9rem;
+    /* max-width:; */
+}
+
+.info .view-time{
+    display:flex;
+}
+.view-time span{
+    margin:0 0.2rem;
+}
+
+@media screen and (max-width:1200px) and (min-width:970px) {
+
+ 
+    main{
+        grid-template-columns:repeat(3,minmax(260px,min-content));
+        gap:20px;
+        justify-content: center;
+    }
+    .videoCards .image {
+        border-radius: 10px 10px 0 0;
+        width: 100%;
+        height:250px;
+      }
+}
+@media screen and (max-width:700px) and (min-width:500px)  {
+
+    main{
+        grid-template-columns:repeat(2,minmax(220px,min-content));
+        gap:10px;
+        justify-content: center;
+    }
+    .videoCards .image {
+        border-radius: 10px 10px 0 0;
+        width: 100%;
+        height:180px;
+    }
+}
+
+
