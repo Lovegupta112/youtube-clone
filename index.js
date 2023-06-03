@@ -222,12 +222,14 @@ function navigateToVideo(videoId){
   console.log(searchInput);
   
 if(videoId){
-  const path='/video.html';
+//   const path='/video.html';
+   const path='video.html';
   // document.cookie=`videoId=${videoId}; path=${path}`
    let myObject={videoId:`${videoId}`,inputValue:`${searchInput.value}`};
    let cookieValue=JSON.stringify(myObject);
    document.cookie="myCookie="+cookieValue;
- window.open('http://127.0.0.1:5500/video.html','blank');
+//  window.open('http://127.0.0.1:5500/video.html','blank');
+   window.open(path,'blank');
 }
 else{
   alert('Owner want to watch this video in Youtube');
